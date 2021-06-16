@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import clsx from 'clsx';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react'
@@ -55,6 +56,9 @@ export default function Home({titles, projects, skills, techs, interests}) {
 
   return (
     <div className={clsx({bgColor}, 'w-full min-h-screen p-4 md:p-8')}>
+      <Head>
+        <title>Andin's</title>
+      </Head>
       <header className="w-full min-h-screen grid grid-flow-row auto-rows-fr md:grid-flow-col md:auto-cols-fr-fr justify-items-center">
         <div className="mx-8 md:mx-0 md:mt-52 md:flex-row space-y-5">
           <p className="text-7xl font-bold font-display fade-in-text">Andin Farrel</p>
@@ -119,9 +123,9 @@ export default function Home({titles, projects, skills, techs, interests}) {
               <div key={index} className="w-full h-full text-center flex flex-col space-y-4">
                 <div className="flex-1 w-full">
                   <img 
-                    className="mx-auto w-auto"
+                    className="mx-auto my-auto w-auto"
                     src={p.fields.Logo[0].url}
-                    style={{maxHeight: "200px"}}
+                    style={{height: "200px"}}
                     alt="logo"
                   />
                 </div>

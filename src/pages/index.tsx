@@ -2,7 +2,7 @@ import Head from 'next/head';
 import clsx from 'clsx';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react'
-import { airtable, getMinifiedRecords } from '../services/airtable';
+import { airtable, getMinifiedRecords } from 'app/services/airtable';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const titlesTable = airtable('Titles');
@@ -15,7 +15,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const titles = await titlesTable.select({
     fields: ["Title"]
   }).all();
-  const projects = await projectsTable.select({}).all();
+  const projects = await projectsTable.select({
+    view: 'Grid view',
+  }).all();
   const skills = await skillsTable.select({}).all();
   const techs = await techsTable.select({}).all();
   const interests = await interestsTable.select({}).all();
@@ -104,7 +106,7 @@ export default function Home({titles, projects, skills, techs, interests}) {
       </section>
       <section className="w-full min-h-screen">
         <p className="text-3xl font-display text-center">{interestsHeading}</p>
-        <div className="w-full h-80 grid auto-rows-fr grid-cols-2 md:grid-cols-3 gap-5 place-items-center my-20  md:p-8">
+        <div className="w-full h-80 grid auto-rows-fr grid-cols-2 md:grid-cols-3 gap-5 place-items-center my-20 md:p-8">
           {
             interests && interests.map((i, index) => (
               <div key={index} className="text-center">
@@ -117,19 +119,16 @@ export default function Home({titles, projects, skills, techs, interests}) {
       </section>
       <section className="w-full min-h-screen">
         <p className="text-3xl font-display text-center">{projectsHeading}</p>
-        <div className="w-full h-full flex flex-col md:flex-row place-items-center space-y-20  my-20  md:p-8">
+        <div className="w-full flex flex-col space-y-8 md:space-y-0 md:grid md:auto-rows-fr md:grid-cols-3 my-20 md:y-40">
           {
             projects && projects.map((p, index) => (
-              <div key={index} className="w-full h-full text-center flex flex-col space-y-4">
-                <div className="flex-1 w-full">
-                  <img 
-                    className="mx-auto my-auto w-auto"
-                    src={p.fields.Logo[0].url}
-                    style={{height: "200px"}}
-                    alt="logo"
-                  />
+              <div className="h-48 md:h-64 flex flex-col space-y-4 text-center">
+                <div 
+                  className="h-5/6 mx-auto"
+                  >
+                    <img className="h-full w-auto" src={p.fields.Logo[0].url}/>
                 </div>
-                <a href={p.fields.Url} className="flex-initial text-center font-body text-lg italic underline hover:text-green-500">{p.fields.Name}</a>
+                <a href={p.fields.Url}className="font-body text-lg italic underline hover:text-green-500">{p.fields.Name}</a>
               </div>
             ))
           }

@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import 'app/styles/globals.css'
 import NavBar from '../components/NavBar';
 // import "tailwindcss/tailwind.css"
 

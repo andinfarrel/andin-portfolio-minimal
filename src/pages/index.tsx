@@ -66,12 +66,12 @@ export default function Home({titles, projects, skills, techs, interests}) {
           <p className="text-7xl font-bold font-display fade-in-text">Andin Farrel</p>
           <p className="italic text-4xl font-body fade-in-text">{currentTitle}</p>
         </div>
-        <div className="order-first mt-10 md:order-last md:mx-0 md:mt-32">
+        <div className="order-first mt-10 md:order-last md:mt-12">
           <img 
             alt={'logo'}
             className="rounded-full"
             style={{ maxWidth: '300px' }}
-            src="/avatar/avatar.svg"/>
+            src="/avatar/jp-avatar.jpg"/>
         </div>
       </header>
       <section className="w-full">
